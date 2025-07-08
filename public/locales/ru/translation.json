@@ -1,0 +1,23 @@
+{
+    "link": "Ссылка",
+    "title": "Заголовок",
+    "dropDown": "Выпадающий список",
+    "signIn": "Войти",
+    "signOut": "Выйти",
+    "signInToContinue": "Войдите, чтобы продолжить",
+    "viaEmail": "Вы успешно вошли через почту {{email}}",
+    "showAllCountries": "Показать все страны",
+    "popularCountries": "Популярные страны",
+    "faq": "Как это работает",
+    "longTitle": "Очень длинный заголовок",
+    "travelSim": "Туристические SIM-карты с интернетом",
+    "countriesOperators": "Страны и операторы",
+    "continue": "Продолжить",
+    "simTitle": "eSIM карты с интернетом для путешествий и бизнеса",
+    "search_placeholder": "Поиск по стране или ISO коду...",
+    "all_countries": "Все страны",
+    "no_results": "Ничего не найдено",
+    "language": "Язык",
+    "country": "Страна"
+  }
+  

@@ -1,0 +1,16 @@
+.lang {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #000;
+  cursor: pointer;
+  user-select: none;
+} 
+
+.switchIcon {
+  width: 16px;
+  rotate: 90deg;
+  opacity: 0.46;
+}
