@@ -76,7 +76,7 @@ const HomePage: NextPage<Props> = ({ countries }) => {
     <>
       <main>
         <MainTitle text={t('simTitle')} />
-        <CountrySearch countries={countries} />
+        <CountrySearch />
         <CountryList initialCountries={countries} />
         <Slider title={t('faq')} />
       </main>
