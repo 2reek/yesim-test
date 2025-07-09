@@ -1,25 +1,37 @@
 .container {
-  padding: 20px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 8px auto;
+  background-color: #fff;
+  border-radius: 16px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  padding: 16px 16px 0;
+  color: #1a1a1a;
 }
 
 .grid {
+  grid-template-columns: 1fr;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
+}
+
+.showAllButtonWrapper {
+  margin: 8px auto;
+  width: 100%;
+  padding: 0 16px 16px;
 }
 
 .showAllButton {
   width: 100%;
-  margin-top: 16px;
-  padding: 12px 0;
-  background-color: #222;
+  padding: 16px 0;
+  background-color: #2e2f32;
   color: #fff;
   border: none;
-  border-radius: 10px;
-  font-size: 1rem;
+  border-radius: 16px;
+  font-size: 17px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -27,8 +39,8 @@
 
 .showAllButton:hover:not(:disabled),
 .showAllButton:focus:not(:disabled) {
-  background-color: #ff9900;
-  color: #222;
+  background-color: #19191a;
+  color: #fff;
 }
 
 .showAllButton:disabled {
@@ -68,13 +80,23 @@
   background: #a22;
 }
 
-@media (max-width: 600px) {
+@media (min-width: 768px) {
   .container {
-    padding: 15px;
+    margin: 24px auto;
+    padding: 0px 24px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 24px;
   }
 
   .grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+
+  .showAllButtonWrapper {
+    padding: 16px 0;
   }
 }

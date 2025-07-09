@@ -2,6 +2,7 @@ import { GetServerSideProps, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import { MainTitle, CountrySearch, CountryList } from '../components/MainPage';
+import { Slider } from '../components/Slider';
 import { Country } from '../types';
 import { POPULAR_COUNTRIES_FALLBACK } from '../constants';
 import { CACHE_DURATION } from '../utils';
@@ -77,6 +78,7 @@ const HomePage: NextPage<Props> = ({ countries }) => {
         <MainTitle text={t('simTitle')} />
         <CountrySearch countries={countries} />
         <CountryList initialCountries={countries} />
+        <Slider title={t('faq')} />
       </main>
     </>
   );

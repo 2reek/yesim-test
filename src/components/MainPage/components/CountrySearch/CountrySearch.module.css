@@ -1,26 +1,20 @@
 .searchWrapper {
   position: relative;
-  margin-bottom: 20px;
+  width: 100%;
+  margin: 16px auto;
 }
 
 .countrySearchInput {
   width: 100%;
   padding: 12px 16px;
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid #e0e0e0;
-  background: #fff;
+  background: #0000000f;
   font-size: 1rem;
   outline: none;
   transition: border-color 0.2s;
 }
 
 .countrySearchInput:focus {
-  border-color: #ff9900;
-}
-
-@media (max-width: 720px) {
-  .countrySearchInput {
-    padding: 10px 12px;
-    font-size: 0.95rem;
-  }
+  background: #00000014;
 }

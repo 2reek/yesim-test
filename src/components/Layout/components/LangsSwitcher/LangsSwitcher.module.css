@@ -2,15 +2,23 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 8px;
   color: #000;
   cursor: pointer;
   user-select: none;
+  background-color: transparent;
+}
+
+.lang:hover {
+  background-color: #0000000a;
 }
 
 .switchIcon {
-  width: 16px;
+  width: 6px;
   rotate: 90deg;
   opacity: 0.46;
 }

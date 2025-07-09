@@ -1,20 +1,19 @@
 .title {
   margin: 0 auto;
-  max-width: 400px;
+  max-width: 340px;
   font-size: 28px;
   font-weight: 700;
   text-align: center;
   color: #000;
-  margin-top: 28px;
-  margin-bottom: 32px;
+  padding-bottom: 16px;
   line-height: 32px;
   letter-spacing: -0.3px;
 }
 
-@media (max-width: 720px) {
+@media (min-width: 768px) {
   .title {
-    max-width: 290px;
-    font-size: 1.5rem;
-    margin-bottom: 16px;
+    font-size: 34px;
+    max-width: 500px;
+    margin-top: 24px;
   }
 }

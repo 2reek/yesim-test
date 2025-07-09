@@ -172,6 +172,7 @@ const CountryList: FC<Props> = ({ initialCountries }) => {
 
   return (
     <div className={styles.container}>
+      <h2 className={styles.title}>{t('popularCountries')}</h2>
       <div className={styles.grid}>
         {countries.map(country => (
           <CountryElement key={country.id} country={country} />
@@ -179,9 +180,11 @@ const CountryList: FC<Props> = ({ initialCountries }) => {
       </div>
 
       {shouldShowButton && (
-        <button onClick={handleShowAll} className={styles.showAllButton} disabled={loading}>
-          {loading ? t('loading') : t('showAllCountries')}
-        </button>
+        <div className={styles.showAllButtonWrapper}>
+          <button onClick={handleShowAll} className={styles.showAllButton} disabled={loading}>
+            {loading ? t('loading') : t('showAllCountries')}
+          </button>
+        </div>
       )}
 
       {shouldShowLoading && <div className={styles.loading}>{t('loading')}</div>}

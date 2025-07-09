@@ -16,8 +16,6 @@
 .dropdownItem {
   display: flex;
   align-items: center;
-  height: 58px;
-  padding: 0 16px;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.15s;

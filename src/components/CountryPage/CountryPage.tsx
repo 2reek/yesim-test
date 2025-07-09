@@ -1,6 +1,9 @@
 import { FC } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import { Country } from '../../types';
+import { Slider } from '../Slider';
 import styles from './CountryPage.module.css';
 
 type Props = {
@@ -10,12 +13,14 @@ type Props = {
 
 const CountryPage: FC<Props> = ({ country }) => {
   const router = useRouter();
+  const { t } = useTranslation();
+
+  const flagSrc = country.iso ? `/flags/${country.iso.toLowerCase()}.svg` : '/flags/un.svg';
 
   if (router.isFallback) {
     return (
       <main className={styles.loadingContainer}>
-        <h2>Загрузка...</h2>
-        <p>Страница генерируется...</p>
+        <h2>{t('loading')}</h2>
       </main>
     );
   }
@@ -23,9 +28,9 @@ const CountryPage: FC<Props> = ({ country }) => {
   if (!country) {
     return (
       <main className={styles.container}>
-        <h1 className={styles.title}>Страна не найдена</h1>
+        <h1 className={styles.title}>{t('countryNotFound')}</h1>
         <button onClick={() => router.back()} className={styles.backButton}>
-          Назад
+          {t('back')}
         </button>
       </main>
     );
@@ -33,24 +38,23 @@ const CountryPage: FC<Props> = ({ country }) => {
 
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>{country.country}</h1>
-      <p className={styles.info}>ISO: {country.iso}</p>
-      {country.classic_info?.price_per_gb && (
-        <p className={styles.price}>
-          Цена: от €
-          {(parseInt(country.classic_info.price_per_gb, 10) / 100).toFixed(2).replace('.', ',')}/GB
-        </p>
-      )}
-      {country.classic_info?.price_per_day && (
-        <p className={styles.price}>
-          Цена за день: от €
-          {(parseInt(country.classic_info.price_per_day, 10) / 100).toFixed(2).replace('.', ',')}
-          /день
-        </p>
-      )}
-      <button onClick={() => router.back()} className={styles.backButton}>
-        Назад
-      </button>
+      <section className={styles.infoCard}>
+        <div className={styles.infoText}>
+          <h1 className={styles.title}>{country.country}</h1>
+          <p className={styles.subtitle}>{t('travelSim')}</p>
+        </div>
+        <div className={styles.flagWrapper}>
+          <Image
+            src={flagSrc}
+            alt={country.country}
+            width={32}
+            height={32}
+            className={styles.flag}
+          />
+        </div>
+      </section>
+
+      <Slider title={t('faq')} />
     </main>
   );
 };
