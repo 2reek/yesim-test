@@ -16,8 +16,12 @@
     "simTitle": "eSIM карты с интернетом для путешествий и бизнеса",
     "search_placeholder": "Поиск по стране или ISO коду...",
     "all_countries": "Все страны",
-    "no_results": "Ничего не найдено",
+    "no_results": "Результаты не найдены",
     "language": "Язык",
-    "country": "Страна"
+    "country": "Страна",
+    "loading": "Загрузка...",
+    "retry": "Повторить",
+    "failedToLoadCountries": "Не удалось загрузить список стран",
+    "from": "от"
   }
   

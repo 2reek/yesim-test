@@ -1,0 +1,118 @@
+import { Country } from '../types';
+
+export const POPULAR_COUNTRIES_ISO = [
+  'us',
+  'ae',
+  'th',
+  'tr',
+  'eg',
+  'es',
+  'it',
+  'de',
+  'cn',
+  'gb',
+  'il',
+  'fr',
+];
+
+export const POPULAR_COUNTRIES_NAMES = [
+  'united-states',
+  'united-arab-emirates',
+  'thailand',
+  'turkey',
+  'egypt',
+  'spain',
+  'italy',
+  'germany',
+  'china',
+  'united-kingdom',
+  'israel',
+  'france',
+];
+
+export const POPULAR_COUNTRIES_FALLBACK: Country[] = [
+  {
+    id: 'us',
+    iso: 'US',
+    country: 'United States',
+    url: '/country/united-states/',
+    classic_info: { new: false, popular: true, price_per_gb: '500', price_per_day: '350' },
+  },
+  {
+    id: 'ae',
+    iso: 'AE',
+    country: 'United Arab Emirates',
+    url: '/country/united-arab-emirates/',
+    classic_info: { new: false, popular: true, price_per_gb: '500', price_per_day: '290' },
+  },
+  {
+    id: 'th',
+    iso: 'TH',
+    country: 'Thailand',
+    url: '/country/thailand/',
+    classic_info: { new: false, popular: true, price_per_gb: '500', price_per_day: '300' },
+  },
+  {
+    id: 'tr',
+    iso: 'TR',
+    country: 'Turkey',
+    url: '/country/turkey/',
+    classic_info: { new: false, popular: true, price_per_gb: '500', price_per_day: '200' },
+  },
+  {
+    id: 'eg',
+    iso: 'EG',
+    country: 'Egypt',
+    url: '/country/egypt/',
+    classic_info: { new: false, popular: true, price_per_gb: '500', price_per_day: '280' },
+  },
+  {
+    id: 'es',
+    iso: 'ES',
+    country: 'Spain',
+    url: '/country/spain/',
+    classic_info: { new: false, popular: true, price_per_gb: '500', price_per_day: '220' },
+  },
+  {
+    id: 'it',
+    iso: 'IT',
+    country: 'Italy',
+    url: '/country/italy/',
+    classic_info: { new: false, popular: true, price_per_gb: '500', price_per_day: '230' },
+  },
+  {
+    id: 'de',
+    iso: 'DE',
+    country: 'Germany',
+    url: '/country/germany/',
+    classic_info: { new: false, popular: true, price_per_gb: '500', price_per_day: '250' },
+  },
+  {
+    id: 'cn',
+    iso: 'CN',
+    country: 'China',
+    url: '/country/china/',
+    classic_info: { new: false, popular: true, price_per_gb: '500', price_per_day: '270' },
+  },
+  {
+    id: 'gb',
+    iso: 'GB',
+    country: 'United Kingdom',
+    url: '/country/united-kingdom/',
+    classic_info: { new: false, popular: true, price_per_gb: '500', price_per_day: '300' },
+  },
+  {
+    id: 'il',
+    iso: 'IL',
+    country: 'Israel',
+    url: '/country/israel/',
+    classic_info: { new: false, popular: true, price_per_gb: '500', price_per_day: '280' },
+  },
+  {
+    id: 'fr',
+    iso: 'FR',
+    country: 'France',
+    url: '/country/france/',
+    classic_info: { new: false, popular: true, price_per_gb: '600', price_per_day: '240' },
+  },
+];

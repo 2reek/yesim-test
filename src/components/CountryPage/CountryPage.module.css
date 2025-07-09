@@ -1,0 +1,48 @@
+.container {
+  padding: 20px;
+  text-align: center;
+}
+
+.loadingContainer {
+  padding: 40px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.info {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  color: #2c5aa0;
+}
+
+.backButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.backButton:hover {
+  background: #444;
+}
+
+.backButton:active {
+  background: #111;
+}

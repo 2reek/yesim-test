@@ -1,27 +1,66 @@
-import type { GetServerSideProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import Header from '../components/Header/Header';
-import MainTitle from '../components/MainTitle/MainTitle';
-import CountrySearch from '../components/CountrySearch/CountrySearch';
-import CountryList from '../components/CountryList/CountryList';
+import { MainTitle, CountrySearch, CountryList } from '../components/MainPage';
 import { Country } from '../types';
+import { POPULAR_COUNTRIES_FALLBACK } from '../constants';
+import { CACHE_DURATION } from '../utils';
+
+const serverCache = new Map<string, { data: Country[]; timestamp: number }>();
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   const lang = locale || 'en';
-  const res = await fetch(`https://api3.yesim.cc/sale_list?force_type=countries&lang=${lang}`);
-  const json = await res.json();
-  
-  const countriesRaw = json?.countries?.[lang] || [];
-  const countries = Array.isArray(countriesRaw) ? countriesRaw.slice(0, 12) : [];
-  
-  return {
-    props: {
-      countries,
-      lang,
-      ...(await serverSideTranslations(lang, ['translation'])),
-    },
-  };
+  const cacheKey = `popular_${lang}`;
+
+  try {
+    const cached = serverCache.get(cacheKey);
+    if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+      return {
+        props: {
+          countries: cached.data,
+          lang,
+          ...(await serverSideTranslations(lang, ['translation'])),
+        },
+      };
+    }
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/get-popular-countries?lang=${lang}`,
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch countries: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (!data.success || !data.countries) {
+      throw new Error('Invalid API response');
+    }
+
+    serverCache.set(cacheKey, {
+      data: data.countries,
+      timestamp: Date.now(),
+    });
+
+    return {
+      props: {
+        countries: data.countries,
+        lang,
+        ...(await serverSideTranslations(lang, ['translation'])),
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching countries:', error);
+
+    return {
+      props: {
+        countries: POPULAR_COUNTRIES_FALLBACK,
+        lang,
+        ...(await serverSideTranslations(lang, ['translation'])),
+      },
+    };
+  }
 };
 
 type Props = {
@@ -29,19 +68,18 @@ type Props = {
   lang: string;
 };
 
-const IndexPage: NextPage<Props> = ({ countries, lang }) => {
+const HomePage: NextPage<Props> = ({ countries }) => {
   const { t } = useTranslation();
 
   return (
     <>
-      <Header />
       <main>
         <MainTitle text={t('simTitle')} />
         <CountrySearch countries={countries} />
-        <CountryList initialCountries={countries} lang={lang} />
+        <CountryList initialCountries={countries} />
       </main>
     </>
   );
 };
 
-export default IndexPage; 
+export default HomePage;

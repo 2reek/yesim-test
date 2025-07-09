@@ -1,4 +1,4 @@
-export type Country = {
+export interface Country {
   id: string;
   country: string;
   iso: string;
@@ -10,5 +10,8 @@ export type Country = {
     price_per_gb: string;
     price_per_day: string;
   };
-  [key: string]: any;
-}; 
+  psg_info?: {
+    coins: string | number | null;
+  };
+  package_included?: Array<{ id: string }>;
+}
