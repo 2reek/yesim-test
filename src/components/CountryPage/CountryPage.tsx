@@ -15,6 +15,10 @@ const CountryPage: FC<Props> = ({ country }) => {
   const router = useRouter();
   const { t } = useTranslation();
 
+  if (!country || !country.iso) {
+    return null;
+  }
+
   const flagSrc = country.iso ? `/flags/${country.iso.toLowerCase()}.svg` : '/flags/un.svg';
 
   if (router.isFallback) {

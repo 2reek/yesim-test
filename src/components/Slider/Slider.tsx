@@ -5,7 +5,6 @@ import styles from './Slider.module.css';
 export interface SlideItem {
   id: string | number;
   title: string;
-  // В будущем здесь может быть imageUrl или другой контент
 }
 
 type Props = {
