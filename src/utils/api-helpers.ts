@@ -30,10 +30,12 @@ export const fetchCountriesFromExternalAPI = async (lang: string = 'ru'): Promis
   }
 };
 
-export const fetchPopularCountriesFromExternalAPI = async (lang: string = 'ru'): Promise<Country[]> => {
+export const fetchPopularCountriesFromExternalAPI = async (
+  lang: string = 'ru',
+): Promise<Country[]> => {
   try {
     const allCountries = await fetchCountriesFromExternalAPI(lang);
-    
+
     return allCountries.filter((country: Country) => {
       const countryName = country.url.replace(/^\/country\//, '').replace(/\/$/, '');
       return POPULAR_COUNTRIES_NAMES.includes(countryName);

@@ -1,55 +1,42 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import { MainTitle, CountrySearch, CountryList } from '@components/MainPage';
 import { Slider } from '@components/Slider';
 import type { Country } from '@/types';
 import { POPULAR_COUNTRIES_FALLBACK } from '@constants/index';
-import { CACHE_DURATION } from '@utils/index';
+import { API_ERRORS, REVALIDATION_TIME } from '@constants/http-statuses';
 
-const serverCache = new Map<string, { data: Country[]; timestamp: number }>();
-
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const lang = locale || 'en';
-  const cacheKey = `popular_${lang}`;
 
   try {
-    const cached = serverCache.get(cacheKey);
-    if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
-      return {
-        props: {
-          countries: cached.data,
-          lang,
-          ...(await serverSideTranslations(lang, ['translation'])),
-        },
-      };
-    }
-
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/get-popular-countries?lang=${lang}`,
+      {
+        next: { revalidate: REVALIDATION_TIME.DEFAULT },
+        headers: {
+          Accept: 'application/json',
+        },
+      },
     );
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch countries: ${response.status}`);
+      throw new Error(API_ERRORS.EXTERNAL_API_ERROR(response.status));
     }
 
     const data = await response.json();
 
     if (!data.success || !data.countries) {
-      throw new Error('Invalid API response');
+      throw new Error(API_ERRORS.INVALID_RESPONSE);
     }
-
-    serverCache.set(cacheKey, {
-      data: data.countries,
-      timestamp: Date.now(),
-    });
 
     return {
       props: {
         countries: data.countries,
-        lang,
         ...(await serverSideTranslations(lang, ['translation'])),
       },
+      revalidate: REVALIDATION_TIME.DEFAULT,
     };
   } catch (error) {
     console.error('Error fetching countries:', error);
@@ -57,16 +44,15 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
     return {
       props: {
         countries: POPULAR_COUNTRIES_FALLBACK,
-        lang,
         ...(await serverSideTranslations(lang, ['translation'])),
       },
+      revalidate: REVALIDATION_TIME.ERROR,
     };
   }
 };
 
 type Props = {
   countries: Country[];
-  lang: string;
 };
 
 const HomePage: NextPage<Props> = ({ countries }) => {

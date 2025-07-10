@@ -17,4 +17,10 @@ export const API_MESSAGES = {
 
 export const API_SUCCESS = {
   status: true,
-} as const; 
+} as const;
+
+export const REVALIDATION_TIME = {
+  DEFAULT: 3600,
+  ERROR: 1800,
+  MINIMUM: 60,
+} as const;

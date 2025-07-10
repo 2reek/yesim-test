@@ -22,14 +22,14 @@ src/
 │   ├── MainPage/       # Home page components
 │   ├── CountryPage/    # Country page
 │   └── Slider/         # FAQ slider
-├── styles/             # Global styles
-├── types/              # TypeScript types
-├── utils/              # Utilities and API helpers
-└── constants/          # Constants and fallback data
+├── styles/            # Global styles
+├── types/             # TypeScript types
+├── utils/             # Utilities and API helpers
+└── constants/         # Constants and fallback data
 
 public/
-├── locales/            # Translations (EN/RU)
-└── flags/              # Country SVG flags
+├── locales/           # Translations (EN/RU)
+└── flags/             # Country SVG flags
 ```
 
 ## 🛠 Commands
@@ -65,17 +65,62 @@ npm run format:fix
 - Detailed country information
 - Country flag display
 - eSIM pricing plans
-- SSG for popular countries
+- SSG with ISR (Incremental Static Regeneration)
+- Revalidation periods:
+  - Default: 1 hour
+  - Error state: 30 minutes
 
 ### API
 - `/api/get-all-countries` - all countries
 - `/api/get-popular-countries` - popular countries
 - Integration with external API `api3.yesim.cc`
+- Built-in error handling and fallback data
 
 ## 📋 Key Features
 
-- **SSG/SSR**: Popular countries are statically generated 24 pages (12 countries × 2 languages)
-- **Fallback**: Backup data when API is unavailable
-- **Caching**: Server-side and client-side data caching
-- **Responsive**: Mobile-friendly adaptive design
-- **TypeScript**: Full project type safety
+- **SSG with ISR**: 
+  - 26 static pages:
+    - 24 country pages (12 countries × 2 languages)
+    - 2 home pages (EN/RU versions)
+  - Automatic revalidation every hour
+  - Faster revalidation on errors (30 minutes)
+- **Fallback**: 
+  - Backup data when API is unavailable
+  - Graceful degradation for 429 errors
+- **Caching**: 
+  - Built-in Next.js caching
+  - Optimized for CDN delivery
+- **TypeScript**: 
+  - Full project type safety
+  - Path aliases for clean imports
+- **Code Organization**:
+  - Centralized constants
+  - Type-safe API responses
+  - Structured error handling
+
+## 🔄 Path Aliases
+
+```typescript
+{
+  "@/*": ["./src/*"],
+  "@components/*": ["./src/components/*"],
+  "@constants/*": ["./src/constants/*"],
+  "@utils/*": ["./src/utils/*"],
+  "@types/*": ["./src/types/*"],
+  "@assets/*": ["./src/assets/*"],
+  "@styles/*": ["./src/styles/*"],
+  "@api/*": ["./src/pages/api/*"]
+}
+```
+
+## 📦 Build Stats
+
+- **Total Pages**: 34
+  - 26 static pages (24 country + 2 home)
+  - 2 dynamic API routes
+  - 6 system pages (_app, 404, etc.)
+- **Bundle Size**: ~104 KB shared JS
+- **CSS Size**: 
+  - Home: 1.61 KB
+  - Country pages: 938 B
+- **Build Time**: ~24 seconds for all pages
