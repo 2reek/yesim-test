@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Country } from '../../types';
 import { POPULAR_COUNTRIES_NAMES, POPULAR_COUNTRIES_FALLBACK } from '../../constants';
+import { HTTP_STATUS, API_ERRORS, API_MESSAGES, API_SUCCESS } from '../../constants/http-statuses';
 
 declare global {
   // eslint-disable-next-line no-var
@@ -12,7 +13,11 @@ if (!global.__popularCountriesCache) {
 }
 
 const apiCache = global.__popularCountriesCache;
-const CACHE_DURATION = 5 * 60 * 1000;
+const CACHE_DURATION = Number(process.env.CACHE_DURATION) || 5 * 60 * 1000;
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
+const API_FORCE_TYPE = process.env.NEXT_PUBLIC_API_FORCE_TYPE;
 
 const fetchAllCountries = async (lang: string = 'ru'): Promise<Country[]> => {
   const cacheKey = `external_${lang}`;
@@ -23,17 +28,17 @@ const fetchAllCountries = async (lang: string = 'ru'): Promise<Country[]> => {
 
   try {
     const response = await fetch(
-      `https://api3.yesim.cc/sale_list?force_type=countries&lang=${lang}`,
+      `${API_URL}${API_ENDPOINT}?force_type=${API_FORCE_TYPE}&lang=${lang}`,
     );
 
     if (!response.ok) {
-      console.error('❌ External API error:', response.status, response.statusText);
+      console.error(API_MESSAGES.EXTERNAL_API_ERROR, response.status, response.statusText);
 
-      if (response.status === 429) {
+      if (response.status === HTTP_STATUS.TOO_MANY_REQUESTS) {
         return POPULAR_COUNTRIES_FALLBACK;
       }
 
-      throw new Error(`External API error: ${response.status}`);
+      throw new Error(API_ERRORS.EXTERNAL_API_ERROR(response.status));
     }
 
     const data = await response.json();
@@ -64,9 +69,9 @@ type ApiResponse = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ApiResponse>) {
   if (req.method !== 'GET') {
-    return res.status(405).json({
+    return res.status(HTTP_STATUS.METHOD_NOT_ALLOWED).json({
       success: false,
-      error: 'Method not allowed',
+      error: API_ERRORS.METHOD_NOT_ALLOWED,
     });
   }
 
@@ -80,22 +85,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     });
 
     if (popularCountries.length === 0) {
-      return res.status(200).json({
+      return res.status(HTTP_STATUS.OK).json({
         success: true,
         countries: POPULAR_COUNTRIES_FALLBACK,
         total: POPULAR_COUNTRIES_FALLBACK.length,
       });
     }
 
-    res.status(200).json({
+    res.status(HTTP_STATUS.OK).json({
       success: true,
       countries: popularCountries,
       total: popularCountries.length,
     });
   } catch (error) {
-    console.error('❌ API Error in get-popular-countries:', error);
+    console.error(`${API_MESSAGES.FETCH_ERROR} get-popular-countries:`, error);
 
-    res.status(200).json({
+    res.status(HTTP_STATUS.OK).json({
       success: true,
       countries: POPULAR_COUNTRIES_FALLBACK,
       total: POPULAR_COUNTRIES_FALLBACK.length,
