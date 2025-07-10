@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Country } from '../../types';
-import { POPULAR_COUNTRIES_FALLBACK } from '../../constants';
-import { HTTP_STATUS, API_ERRORS, API_MESSAGES, API_SUCCESS } from '../../constants/http-statuses';
+import type { Country } from '@/types';
+import { POPULAR_COUNTRIES_FALLBACK } from '@constants/index';
+import { HTTP_STATUS, API_ERRORS, API_MESSAGES } from '@constants/http-statuses';
 
 declare global {
   // eslint-disable-next-line no-var

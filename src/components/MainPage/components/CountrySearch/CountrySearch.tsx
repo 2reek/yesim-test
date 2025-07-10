@@ -1,9 +1,9 @@
 import { FC, useState, useMemo, useRef, useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { Country } from '../../../../types';
-import { CountrySearchDropdown } from '../CountrySearchDropdown';
-import { fetchCountriesFromExternalAPI } from '../../../../utils/api-helpers';
+import type { Country } from '@/types';
+import { CountrySearchDropdown } from '@components/MainPage/components/CountrySearchDropdown';
+import { fetchCountriesFromExternalAPI } from '@utils/api-helpers';
 import styles from './CountrySearch.module.css';
 
 const CountrySearch: FC = () => {

@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import styles from './CountryElement.module.css';
-import { Country } from '../../../../types';
-import AddonIcon from '../../../../assets/icons/addon.svg';
+import type { Country } from '@/types';
+import AddonIcon from '@assets/icons/addon.svg';
 
 type Props = {
   country: Country;

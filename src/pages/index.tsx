@@ -1,11 +1,11 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
-import { MainTitle, CountrySearch, CountryList } from '../components/MainPage';
-import { Slider } from '../components/Slider';
-import { Country } from '../types';
-import { POPULAR_COUNTRIES_FALLBACK } from '../constants';
-import { CACHE_DURATION } from '../utils';
+import { MainTitle, CountrySearch, CountryList } from '@components/MainPage';
+import { Slider } from '@components/Slider';
+import type { Country } from '@/types';
+import { POPULAR_COUNTRIES_FALLBACK } from '@constants/index';
+import { CACHE_DURATION } from '@utils/index';
 
 const serverCache = new Map<string, { data: Country[]; timestamp: number }>();
 

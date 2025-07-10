@@ -2,8 +2,8 @@ import { FC } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import { Country } from '../../types';
-import { Slider } from '../Slider';
+import type { Country } from '@/types';
+import { Slider } from '@components/Slider';
 import styles from './CountryPage.module.css';
 
 type Props = {

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'next-i18next';
-import { Country } from '../../../../types';
-import { CountryElement } from '../CountryElement';
+import type { Country } from '@/types';
+import { CountryElement } from '@components/MainPage/components/CountryElement';
 import styles from './CountrySearchDropdown.module.css';
 
 type Props = {

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Image from 'next/image';
-import { YesimLogoIcon } from '../../../../assets/icons';
-import { LangsSwitcher } from '../LangsSwitcher';
+import { YesimLogoIcon } from '@assets/icons';
+import { LangsSwitcher } from '@components/Layout/components/LangsSwitcher';
 import styles from './Header.module.css';
 
 const Header: FC = () => {

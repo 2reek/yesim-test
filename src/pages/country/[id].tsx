@@ -1,12 +1,12 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Country } from '../../types';
-import { findCountryById } from '../../utils/utils';
-import { CountryPage as CountryPageComponent } from '../../components';
+import type { Country } from '@/types';
+import { findCountryById } from '@utils/utils';
+import CountryPageComponent from '@components/CountryPage/CountryPage';
 import {
   fetchCountriesFromExternalAPI,
   fetchPopularCountriesFromExternalAPI,
-} from '../../utils/api-helpers';
+} from '@utils/api-helpers';
 import { useRouter } from 'next/router';
 
 export const getStaticPaths: GetStaticPaths = async () => {

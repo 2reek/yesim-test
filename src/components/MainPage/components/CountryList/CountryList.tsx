@@ -1,9 +1,9 @@
 import { FC, useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { Country } from '../../../../types';
-import { countriesCache, CACHE_DURATION } from '../../../../utils';
-import { CountryElement } from '../CountryElement';
+import type { Country } from '@/types';
+import { countriesCache, CACHE_DURATION } from '@utils/index';
+import { CountryElement } from '@components/MainPage/components/CountryElement';
 import styles from './CountryList.module.css';
 
 type Props = {

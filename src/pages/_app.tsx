@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app';
 import { appWithTranslation } from 'next-i18next';
-import { Layout } from '../components';
-import '../styles/globals.css';
+import { Layout } from '@components/Layout';
+import '@styles/globals.css';
 
 const YesimApp = ({ Component, pageProps }: AppProps) => {
   return (
